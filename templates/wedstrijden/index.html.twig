@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Wedstrijden index{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Wedstrijden index</h1>
+
+    <table class="table text-center">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Speler 1</th>
+                <th>Score</th>
+                <th>Speler 2</th>
+                <th>Winaar</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for wedstrijden in wedstrijdens %}
+            <tr>
+                <td>{{ wedstrijden.id }}</td>
+                <td>{{ wedstrijden.speler1 }}</td>
+                <td>{{ wedstrijden.score1 }} | {{ wedstrijden.score2 }}</td>
+                <td>{{ wedstrijden.speler2 }}</td>
+                <td>{{ wedstrijden.winaar }}</td>
+                <td>
+                    <a href="{{ path('wedstrijden_show', {'id': wedstrijden.id}) }}">show</a>
+                    <a href="{{ path('wedstrijden_edit', {'id': wedstrijden.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('wedstrijden_new') }}">Create new</a>
+{% endblock %}

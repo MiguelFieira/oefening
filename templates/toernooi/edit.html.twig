@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Toernooi{% endblock %}
+
+{% block body %}
+    <h1>Edit Toernooi</h1>
+
+    {{ include('toernooi/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('toernooi_index') }}">back to list</a>
+
+    {{ include('toernooi/_delete_form.html.twig') }}
+{% endblock %}

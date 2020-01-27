@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Toernooi index{% endblock %}
+
+{% block body %}
+    <h1>Toernooi index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Omschrijving</th>
+                <th>Datum</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for toernooi in toernoois %}
+            <tr>
+                <td>{{ toernooi.id }}</td>
+                <td>{{ toernooi.omschrijving }}</td>
+                <td>{{ toernooi.datum ? toernooi.datum|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('toernooi_show', {'id': toernooi.id}) }}">show</a>
+                    <a href="{{ path('toernooi_edit', {'id': toernooi.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('toernooi_new') }}">Create new</a>
+{% endblock %}

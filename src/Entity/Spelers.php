@@ -88,4 +88,7 @@ class Spelers
 
         return $this;
     }
+    public function __toString() {
+        return ''.$this->voornaam;
+    }
 }

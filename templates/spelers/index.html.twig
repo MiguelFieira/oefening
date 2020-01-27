@@ -14,7 +14,7 @@
                 <th>Tussenvoegsel</th>
                 <th>Achternaam</th>
                 <th>School</th>
-                <th>actions</th>
+                <th>Acties</th>
             </tr>
         </thead>
         <tbody>
@@ -26,8 +26,8 @@
                 <td>{{ speler.achternaam }}</td>
                 <td>{{ speler.school }}</td>
                 <td>
-                    <a href="{{ path('spelers_show', {'id': speler.id}) }}">show</a>
-                    <a href="{{ path('spelers_edit', {'id': speler.id}) }}">edit</a>
+                    <a href="{{ path('spelers_show', {'id': speler.id}) }}">Bekijken</a>
+                    <a href="{{ path('spelers_edit', {'id': speler.id}) }}">Bewerken</a>
                 </td>
             </tr>
         {% else %}
@@ -38,6 +38,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('spelers_new') }}">Create new</a>
+    <a href="{{ path('spelers_new') }}">Speler Aanmaken</a>
 </div>
 {% endblock %}
