@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Aanmelding{% endblock %}
+
+{% block body %}
+    <h1>Edit Aanmelding</h1>
+
+    {{ include('aanmelding/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('aanmelding_index') }}">back to list</a>
+
+    {{ include('aanmelding/_delete_form.html.twig') }}
+{% endblock %}

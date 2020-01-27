@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Aanmelding index{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Aanmelding index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Speler</th>
+                <th>Toernooi</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for aanmelding in aanmeldings %}
+            <tr>
+                <td>{{ aanmelding.id }}</td>
+                <td>{{ aanmelding.speler }}</td>
+                <td>{{ aanmelding.toernooi }}</td>
+                <td>
+                    <a href="{{ path('aanmelding_show', {'id': aanmelding.id}) }}">show</a>
+                    <a href="{{ path('aanmelding_edit', {'id': aanmelding.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('aanmelding_new') }}">Create new</a>
+</div>
+{% endblock %}

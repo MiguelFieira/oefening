@@ -7,3 +7,6 @@ wedstrijden:
 
 spelers:
    path: /spelers
+
+scholen:
+   path: /scholen

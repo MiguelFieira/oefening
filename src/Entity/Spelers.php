@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +37,16 @@ class Spelers
      * @ORM\ManyToOne(targetEntity="App\Entity\Scholen")
      */
     private $school;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Aanmelding", mappedBy="speler", orphanRemoval=true)
+     */
+    private $aanmeldingen;
+
+    public function __construct()
+    {
+        $this->aanmeldingen = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,5 +102,36 @@ class Spelers
     }
     public function __toString() {
         return ''.$this->voornaam;
+    }
+
+    /**
+     * @return Collection|Aanmelding[]
+     */
+    public function getAanmeldingen(): Collection
+    {
+        return $this->aanmeldingen;
+    }
+
+    public function addAanmeldingen(Aanmelding $aanmeldingen): self
+    {
+        if (!$this->aanmeldingen->contains($aanmeldingen)) {
+            $this->aanmeldingen[] = $aanmeldingen;
+            $aanmeldingen->setSpeler($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAanmeldingen(Aanmelding $aanmeldingen): self
+    {
+        if ($this->aanmeldingen->contains($aanmeldingen)) {
+            $this->aanmeldingen->removeElement($aanmeldingen);
+            // set the owning side to null (unless already changed)
+            if ($aanmeldingen->getSpeler() === $this) {
+                $aanmeldingen->setSpeler(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,6 +27,16 @@ class Toernooi
      * @ORM\Column(type="date", nullable=true)
      */
     private $datum;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Aanmelding", mappedBy="toernooi", orphanRemoval=true)
+     */
+    private $toernooien;
+
+    public function __construct()
+    {
+        $this->toernooien = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -56,5 +68,36 @@ class Toernooi
     }
     public function __toString() {
         return ''.$this->omschrijving;
+    }
+
+    /**
+     * @return Collection|Aanmelding[]
+     */
+    public function getToernooien(): Collection
+    {
+        return $this->toernooien;
+    }
+
+    public function addToernooien(Aanmelding $toernooien): self
+    {
+        if (!$this->toernooien->contains($toernooien)) {
+            $this->toernooien[] = $toernooien;
+            $toernooien->setToernooi($this);
+        }
+
+        return $this;
+    }
+
+    public function removeToernooien(Aanmelding $toernooien): self
+    {
+        if ($this->toernooien->contains($toernooien)) {
+            $this->toernooien->removeElement($toernooien);
+            // set the owning side to null (unless already changed)
+            if ($toernooien->getToernooi() === $this) {
+                $toernooien->setToernooi(null);
+            }
+        }
+
+        return $this;
     }
 }
